@@ -9,4 +9,3 @@ function playJokenpo(str) {
   }
 }
 
-playJokenpo('caneca');
