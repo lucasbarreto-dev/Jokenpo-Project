@@ -39,6 +39,7 @@ class Input extends React.Component {
 
   // FUNCTION FOR VALIDATION OF MY CHOICE AND SETTING COMPUTER'S CHOICE;
   handleAnswer = () => {
+    console.log('Entrei no handleAnswer!');
     const { myAnswer } = this.state;
     const elementParameter = JOKENPO.find((element) => element.name === myAnswer);
 
@@ -57,8 +58,8 @@ class Input extends React.Component {
 
   // FUNCTION FOR SETTING THE RESULT OF THE GAME;
   handleResult = () => {
+    console.log('Entrei no handleResult!');
     const { myAnswer, computerAnswer } = this.state;
-    this.handleAnswer();
     
     if (JOKENPO.some((element) => element.winsOf === computerAnswer)) {
         this.setState({
@@ -80,10 +81,10 @@ class Input extends React.Component {
   }
 
   render() {
-    // const { myAnswer } = this.state;
-    const { computerAnswer, result, showResult } = this.state;
+    // const { result, showResult } = this.state;
+    const { computerAnswer, myAnswer } = this.state;
     return(
-      <body class="grid h-screen place-items-center">
+      <div className="grid h-screen place-items-center">
         <div 
           align="center" 
           className="p-4 max-w-sm bg-blue-50 rounded-lg border mt-0 border-gray-200 shadow-md sm:p-6 lg:p-8 dark:border-gray-300"
@@ -110,23 +111,29 @@ class Input extends React.Component {
           </div>
           <br />
           <div>
-            {/* <div id="players-choice">
+            <div id="players-choice">
               <h4 className="font-medium leading-tight text-2xl mt-0 mb-2 text-gray-700">You choose</h4>
               <div className="p-4 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 lg:p-8 dark:border-gray-300">
                 <h4 className="font-medium leading-tight text-xl mt-0 mb-2 text-black-600">{ myAnswer }</h4>
               </div>
-            </div> */}
-            <br />
-    
-            <div id="computers-choice" >
-              <h4 className="font-medium leading-tight text-2xl mt-0 mb-2 text-gray-700">Computer chooses</h4>
-              <div className="p-4 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 lg:p-8 dark:border-gray-300">
-                <h4 className="font-medium leading-tight text-xl mt-0 mb-2 text-black-600">{ computerAnswer }</h4>
-              </div>
             </div>
             <br />
 
-            { (showResult === true) 
+            { (computerAnswer) 
+              ? 
+                (<div id="computers-choice" >
+                  <h4 className="font-medium leading-tight text-2xl mt-0 mb-2 text-gray-700">
+                    Computer chooses
+                  </h4>
+                  <div className="p-4 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 lg:p-8 dark:border-gray-300">
+                    <h4 className="font-medium leading-tight text-xl mt-0 mb-2 text-black-600">{ computerAnswer }</h4>
+                  </div>
+                </div>)
+                :
+                <div /> }
+            
+
+            {/* { (showResult === true) 
               ? 
                 (<div id="result">
                   <h4 className="font-medium leading-tight text-2xl mt-0 mb-2 text-gray-700">
@@ -137,11 +144,11 @@ class Input extends React.Component {
                   </div>
                 </div>)
                 :
-                <div /> }
+                <div /> } */}
             
           </div>
         </div>
-      </body>
+      </div>
     );
   }
 };
