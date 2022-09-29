@@ -38,8 +38,7 @@ class Input extends React.Component {
   };
 
   // FUNCTION FOR VALIDATION OF MY CHOICE AND SETTING COMPUTER'S CHOICE;
-  handleAnswer = () => {
-    console.log('Entrei no handleAnswer!');
+  handleAnswer = (event) => {
     const { myAnswer } = this.state;
     const elementParameter = JOKENPO.find((element) => element.name === myAnswer);
 
@@ -58,22 +57,21 @@ class Input extends React.Component {
 
   // FUNCTION FOR SETTING THE RESULT OF THE GAME;
   handleResult = () => {
-    console.log('Entrei no handleResult!');
     const { myAnswer, computerAnswer } = this.state;
     
-    if (JOKENPO.some((element) => element.winsOf === computerAnswer)) {
+    if (JOKENPO.find((element) => element.name === myAnswer).winsOf === computerAnswer) {
         this.setState({
           result: 'You won!',
         })
     }
     
-    if (JOKENPO.some((element) => element.losesFor === computerAnswer)) {
+    if (JOKENPO.find((element) => element.name === myAnswer).losesFor === computerAnswer) {
       this.setState({
         result: 'You lose!',
       })
     }
 
-    if (JOKENPO.some((element) => element.name === myAnswer) && myAnswer === computerAnswer) {
+    if (JOKENPO.find((element) => element.name === myAnswer) && myAnswer === computerAnswer) {
       this.setState({
         result: 'Game draw!',
       })
@@ -81,7 +79,7 @@ class Input extends React.Component {
   }
 
   render() {
-    // const { result, showResult } = this.state;
+    const { result, showResult } = this.state;
     const { computerAnswer, myAnswer } = this.state;
     return(
       <div className="grid h-screen place-items-center">
@@ -133,7 +131,7 @@ class Input extends React.Component {
                 <div /> }
             
 
-            {/* { (showResult === true) 
+            { (showResult === true) 
               ? 
                 (<div id="result">
                   <h4 className="font-medium leading-tight text-2xl mt-0 mb-2 text-gray-700">
@@ -144,7 +142,7 @@ class Input extends React.Component {
                   </div>
                 </div>)
                 :
-                <div /> } */}
+                <div /> }
             
           </div>
         </div>
